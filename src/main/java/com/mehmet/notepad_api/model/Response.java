@@ -1,6 +1,5 @@
 package com.mehmet.notepad_api.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -17,15 +17,47 @@ public class NoteController {
     }
 
     @PostMapping("/saveNote")
-    public Response saveNote(@RequestBody Note note) {
-
+    public ResponseEntity<Response> saveNote(@RequestBody Note note) {
         Response response = new Response();
         response.setStatus("Successful");
         response.setMessage("Note saved");
         response.setData(noteService.addNote(note));
+        return ResponseEntity.ok(response);
+    }
 
-        return response;
+    @DeleteMapping("/deleteNote/{id}")
+    public ResponseEntity<Response> deleteNote(@PathVariable Integer id) {
+        Response response = new Response();
+        response.setStatus("Successful");
+        response.setMessage("Note deleted\nNote id: " + id);
+        response.setData(noteService.deleteNote(id));
+        return ResponseEntity.ok(response);
+    }
 
+    @PostMapping("/editNote")
+    public ResponseEntity<Response> updateNote(@RequestBody Note note) {
+        Response response = new Response();
+        response.setStatus("Successful");
+        response.setMessage("Note updated");
+        response.setData(noteService.editNote(note));
+        return ResponseEntity.ok(response);
+    }
 
+    @GetMapping("/getAllNotes")
+    public ResponseEntity<Response> getAllNotes() {
+        Response response = new Response();
+        response.setStatus("Successful");
+        response.setMessage("Notes");
+        response.setData(noteService.getAllNotes());
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/getAllEditedNotes")
+    public ResponseEntity<Response> getAllEditedNotes() {
+        Response response = new Response();
+        response.setStatus("Successful");
+        response.setMessage("Edited Notes: ");
+        response.setData(noteService.getAllEdits());
+        return ResponseEntity.ok(response);
     }
 }
