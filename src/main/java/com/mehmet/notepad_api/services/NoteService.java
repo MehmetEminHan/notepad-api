@@ -26,6 +26,7 @@ public class NoteService {
     }
 
     public String deleteNote(Integer Id) {
+        editRepository.deleteByLinknum(Id);
         noteRepository.deleteById(Id);
         return "Note deleted";
     }
