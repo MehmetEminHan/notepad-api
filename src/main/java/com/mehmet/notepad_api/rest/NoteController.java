@@ -3,12 +3,13 @@ package com.mehmet.notepad_api.rest;
 import com.mehmet.notepad_api.model.Note;
 import com.mehmet.notepad_api.model.Response;
 import com.mehmet.notepad_api.services.NoteService;
+import com.mehmet.notepad_api.services.ResponseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("v1")
-public class NoteController {
+public class NoteController extends ResponseService {
 
     private final NoteService noteService;
 
@@ -18,46 +19,26 @@ public class NoteController {
 
     @PostMapping("/saveNote")
     public ResponseEntity<Response> saveNote(@RequestBody Note note) {
-        Response response = new Response();
-        response.setStatus("Successful");
-        response.setMessage("Note saved");
-        response.setData(noteService.addNote(note));
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(createCustomResponse("Successful", "Note saved", noteService.addNote(note)));
     }
 
     @DeleteMapping("/deleteNote/{id}")
     public ResponseEntity<Response> deleteNote(@PathVariable Integer id) {
-        Response response = new Response();
-        response.setStatus("Successful");
-        response.setMessage("Note deleted\nNote id: " + id);
-        response.setData(noteService.deleteNote(id));
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(createCustomResponse("Successful", "Note deleted\\nNote id: \"" + id, noteService.deleteNote(id)));
     }
 
     @PostMapping("/editNote")
     public ResponseEntity<Response> updateNote(@RequestBody Note note) {
-        Response response = new Response();
-        response.setStatus("Successful");
-        response.setMessage("Note updated");
-        response.setData(noteService.editNote(note));
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(createCustomResponse("Successful", "Note updated", noteService.editNote(note)));
     }
 
     @GetMapping("/getAllNotes")
     public ResponseEntity<Response> getAllNotes() {
-        Response response = new Response();
-        response.setStatus("Successful");
-        response.setMessage("Notes");
-        response.setData(noteService.getAllNotes());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(createCustomResponse("Successful", "Notes", noteService.getAllNotes()));
     }
 
     @GetMapping("/getAllEditedNotes")
     public ResponseEntity<Response> getAllEditedNotes() {
-        Response response = new Response();
-        response.setStatus("Successful");
-        response.setMessage("Edited Notes: ");
-        response.setData(noteService.getAllEdits());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(createCustomResponse("Successful", "Notes", noteService.getAllEdits()));
     }
 }
