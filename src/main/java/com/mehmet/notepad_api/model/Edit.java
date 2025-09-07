@@ -11,9 +11,9 @@ import java.util.Date;
 public class Edit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
-    private Integer linknum;
+    private int linknum;
     private Date editDate;
     private String editedBy;
     private String beforeEdit;
