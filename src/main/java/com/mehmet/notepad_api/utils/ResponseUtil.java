@@ -1,10 +1,10 @@
-package com.mehmet.notepad_api.services;
+package com.mehmet.notepad_api.utils;
 
 import com.mehmet.notepad_api.model.Response;
 
-public class ResponseService {
+public class ResponseUtil {
 
-    public Response createCustomResponse(String status, String message, Object data) {
+    public static Response getResponse(String status, String message, Object data) {
         Response response = new Response();
         response.setStatus(status);
         response.setMessage(message);
