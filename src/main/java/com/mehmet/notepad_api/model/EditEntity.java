@@ -8,7 +8,8 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Edit {
+@Table(name = "Edit")
+public class EditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

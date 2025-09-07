@@ -1,7 +1,7 @@
 package com.mehmet.notepad_api.services;
 
-import com.mehmet.notepad_api.model.Edit;
-import com.mehmet.notepad_api.model.Note;
+import com.mehmet.notepad_api.model.EditEntity;
+import com.mehmet.notepad_api.model.NoteEntity;
 import com.mehmet.notepad_api.repository.EditRepository;
 import com.mehmet.notepad_api.repository.NoteRepository;
 import org.springframework.stereotype.Service;
@@ -20,39 +20,39 @@ public class NoteService {
         this.editRepository = editRepository;
     }
 
-    public Note addNote(Note note) {
-        note.setAuthor(System.getProperty("user.name"));
-        return noteRepository.save(note);
+    public NoteEntity addNote(NoteEntity noteEntity) {
+        noteEntity.setAuthor(System.getProperty("user.name"));
+        return noteRepository.save(noteEntity);
     }
 
     public String deleteNote(Integer Id) {
         editRepository.deleteByLinknum(Id);
         noteRepository.deleteById(Id);
-        return "Note deleted";
+        return "NoteEntity deleted";
     }
 
-    public Note editNote(Note note) {
-        Edit edit = new Edit();
+    public NoteEntity editNote(NoteEntity noteEntity) {
+        EditEntity editEntity = new EditEntity();
 
-        edit.setLinknum(noteRepository.findById(note.getId()).get().getId());
-        edit.setEditedBy(System.getProperty("user.name"));
-        edit.setBeforeEdit(noteRepository.findById(note.getId()).get().getContent());
-        edit.setAfterEdit(note.getContent());
-        edit.setEditDate(new Date());
+        editEntity.setLinknum(noteRepository.findById(noteEntity.getId()).get().getId());
+        editEntity.setEditedBy(System.getProperty("user.name"));
+        editEntity.setBeforeEdit(noteRepository.findById(noteEntity.getId()).get().getContent());
+        editEntity.setAfterEdit(noteEntity.getContent());
+        editEntity.setEditDate(new Date());
 
-        noteRepository.findById(note.getId()).get().setContent(note.getContent());
+        noteRepository.findById(noteEntity.getId()).get().setContent(noteEntity.getContent());
 
-        noteRepository.save(noteRepository.findById(note.getId()).get());
-        editRepository.save(edit);
+        noteRepository.save(noteRepository.findById(noteEntity.getId()).get());
+        editRepository.save(editEntity);
 
-        return noteRepository.findById(note.getId()).get();
+        return noteRepository.findById(noteEntity.getId()).get();
     }
 
-    public List<Note> getAllNotes() {
+    public List<NoteEntity> getAllNotes() {
         return noteRepository.findAll();
     }
 
-    public List<Edit> getAllEdits() {
+    public List<EditEntity> getAllEdits() {
         return editRepository.findAll();
     }
 }

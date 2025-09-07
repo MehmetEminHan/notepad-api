@@ -1,6 +1,6 @@
 package com.mehmet.notepad_api.rest;
 
-import com.mehmet.notepad_api.model.Note;
+import com.mehmet.notepad_api.model.NoteEntity;
 import com.mehmet.notepad_api.model.Response;
 import com.mehmet.notepad_api.services.NoteService;
 import com.mehmet.notepad_api.services.ResponseService;
@@ -18,18 +18,18 @@ public class NoteController extends ResponseService {
     }
 
     @PostMapping("/saveNote")
-    public ResponseEntity<Response> saveNote(@RequestBody Note note) {
-        return ResponseEntity.ok(createCustomResponse("Successful", "Note saved", noteService.addNote(note)));
+    public ResponseEntity<Response> saveNote(@RequestBody NoteEntity noteEntity) {
+        return ResponseEntity.ok(createCustomResponse("Successful", "NoteEntity saved", noteService.addNote(noteEntity)));
     }
 
     @DeleteMapping("/deleteNote/{id}")
     public ResponseEntity<Response> deleteNote(@PathVariable Integer id) {
-        return ResponseEntity.ok(createCustomResponse("Successful", "Note deleted\\nNote id: \"" + id, noteService.deleteNote(id)));
+        return ResponseEntity.ok(createCustomResponse("Successful", "NoteEntity deleted\\nNoteEntity id: \"" + id, noteService.deleteNote(id)));
     }
 
     @PostMapping("/editNote")
-    public ResponseEntity<Response> updateNote(@RequestBody Note note) {
-        return ResponseEntity.ok(createCustomResponse("Successful", "Note updated", noteService.editNote(note)));
+    public ResponseEntity<Response> updateNote(@RequestBody NoteEntity noteEntity) {
+        return ResponseEntity.ok(createCustomResponse("Successful", "NoteEntity updated", noteService.editNote(noteEntity)));
     }
 
     @GetMapping("/getAllNotes")

@@ -9,7 +9,8 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Note {
+@Table(name = "Note")
+public class NoteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
