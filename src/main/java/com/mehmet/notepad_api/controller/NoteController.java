@@ -37,8 +37,8 @@ public class NoteController {
         return ResponseEntity.ok(ResponseUtil.getResponse(SUCCESSFUL, NOTE_UPDATED, noteService.editNote(noteDTO)));
     }
 
-    @GetMapping("/get-all")
-    public ResponseEntity<Response> getAllNotes() {
-        return ResponseEntity.ok(ResponseUtil.getResponse(SUCCESSFUL, ALL_NOTES, noteService.getAllNotes()));
+    @GetMapping("/get-all/page/{pageNumber}")
+    public ResponseEntity<Response> getAllNotes(@PathVariable int pageNumber) {
+        return ResponseEntity.ok(ResponseUtil.getResponse(SUCCESSFUL, ALL_NOTES, noteService.getAllNotes(pageNumber)));
     }
 }

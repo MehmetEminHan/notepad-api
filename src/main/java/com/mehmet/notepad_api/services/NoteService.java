@@ -4,6 +4,7 @@ import com.mehmet.notepad_api.model.NoteDTO;
 import com.mehmet.notepad_api.model.NoteEntity;
 import com.mehmet.notepad_api.repository.NoteRepository;
 import com.mehmet.notepad_api.services.mapper.NoteMapper;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,9 +41,9 @@ public class NoteService {
         return noteDTOList;
     }
 
-    public List<NoteDTO> getAllNotes() {
+    public List<NoteDTO> getAllNotes(int pageNumber) {
         List<NoteDTO> noteDTOList = new ArrayList<>();
-        noteRepository.findAll().forEach(note -> noteDTOList.add(noteMapper.entityToDto(note)));
+        noteRepository.findAll(PageRequest.of(pageNumber,100)).forEach(note -> noteDTOList.add(noteMapper.entityToDto(note)));
         return noteDTOList;
     }
 }
