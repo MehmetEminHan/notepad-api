@@ -1,6 +1,6 @@
 package com.mehmet.notepad_api.controller;
 
-import com.mehmet.notepad_api.model.NoteEntity;
+import com.mehmet.notepad_api.model.NoteDTO;
 import com.mehmet.notepad_api.model.Response;
 import com.mehmet.notepad_api.services.NoteService;
 import com.mehmet.notepad_api.utils.ResponseUtil;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/v1/note")
 @AllArgsConstructor
-public class NoteController{
+public class NoteController {
 
     private final NoteService noteService;
 
@@ -23,8 +23,8 @@ public class NoteController{
     private static final String ALL_EDITS = "All edits returned!";
 
     @PostMapping("/save")
-    public ResponseEntity<Response> saveNote(@RequestBody NoteEntity noteEntity) {
-        return ResponseEntity.ok(ResponseUtil.getResponse(SUCCESSFUL, NOTE_SAVED, noteService.addNote(noteEntity)));
+    public ResponseEntity<Response> saveNote(@RequestBody NoteDTO noteDTO) {
+        return ResponseEntity.ok(ResponseUtil.getResponse(SUCCESSFUL, NOTE_SAVED, noteService.addNote(noteDTO)));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -33,17 +33,12 @@ public class NoteController{
     }
 
     @PutMapping("/edit")
-    public ResponseEntity<Response> updateNote(@RequestBody NoteEntity noteEntity) {
-        return ResponseEntity.ok(ResponseUtil.getResponse(SUCCESSFUL, NOTE_UPDATED, noteService.editNote(noteEntity)));
+    public ResponseEntity<Response> updateNote(@RequestBody NoteDTO noteDTO) {
+        return ResponseEntity.ok(ResponseUtil.getResponse(SUCCESSFUL, NOTE_UPDATED, noteService.editNote(noteDTO)));
     }
 
     @GetMapping("/get-all")
     public ResponseEntity<Response> getAllNotes() {
         return ResponseEntity.ok(ResponseUtil.getResponse(SUCCESSFUL, ALL_NOTES, noteService.getAllNotes()));
-    }
-
-    @GetMapping("/get-all-edits")
-    public ResponseEntity<Response> getAllEditedNotes() {
-        return ResponseEntity.ok(ResponseUtil.getResponse(SUCCESSFUL, ALL_EDITS, noteService.getAllEdits()));
     }
 }
