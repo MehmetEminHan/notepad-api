@@ -17,7 +17,7 @@ public class NoteController {
 
     private static final String SUCCESSFUL = "Successful";
     private static final String NOTE_SAVED = "Note saved!";
-    private static final String NOTE_DELETED = "NoteEntity deleted\\nNoteEntity id: \"";
+    private static final String NOTE_DELETED = "NoteEntity id: ";
     private static final String NOTE_UPDATED = "Note updated!";
     private static final String ALL_NOTES = "All notes returned!";
     private static final String ALL_EDITS = "All edits returned!";

@@ -25,9 +25,13 @@ public class NoteService {
         return noteRepository.save(noteMapper.dtoToEntity(noteDTO));
     }
 
-    public String deleteNote(Integer Id) {
-        noteRepository.deleteById(Id);
-        return "NoteEntity deleted";
+    public boolean deleteNote(Integer Id) {
+        if (noteRepository.existsById(Id)) {
+            noteRepository.deleteById(Id);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public List<NoteDTO> editNote(NoteDTO noteDTO) {
